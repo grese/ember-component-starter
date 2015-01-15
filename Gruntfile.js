@@ -1,0 +1,65 @@
+module.exports = function(grunt) {
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    concat: {
+      options: {
+        separator: "\n\n"
+      },
+      build: {
+        src: [
+          'src/javascript/**/*.js'
+        ],
+        dest: 'build/javascript.js'
+      },
+      dist: {
+        src: [
+          'build/**/*.js'
+        ],
+        dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
+      }
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'  
+      }
+    },
+    jshint: {
+      files: ['src/**/*.js'],
+      options: {
+        jshintrc: '.jshintrc',        
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          'dist/<%= pkg.name.replace(".js", "") %>.min.js': ['<%= concat.dist.dest %>']
+        }
+      }
+    },
+    emberTemplates: {
+      options: {
+        templateName: function(sourceFile) {
+          return 'component-template-'+sourceFile.replace(/\//, '-');
+        }
+      },
+      'build/templates.js': ["src/**/*.hbs"]
+    },
+    clean: ['build', 'dist']
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-ember-templates');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-karma');
+
+  // default task just builds & dists the package.
+  grunt.registerTask('default', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'uglify', 'concat:dist']);
+  // test task builds, tests, and then dists the package.
+  grunt.registerTask('test', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'karma', 'uglify', 'concat:dist']);
+};
