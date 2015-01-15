@@ -69,7 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
 
   // default task just builds & dists the package.
-  grunt.registerTask('default', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'uglify', 'concat:dist', 'copy:css']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'concat:dist', 'uglify', 'copy:css']);
   // test task builds, tests, and then dists the package.
-  grunt.registerTask('test', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'karma', 'uglify', 'concat:dist', 'copy:css']);
+  grunt.registerTask('test', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'karma', 'concat:dist', 'uglify', 'copy:css']);
 };
