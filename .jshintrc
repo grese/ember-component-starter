@@ -19,7 +19,8 @@
     "test",
     "emq",
     "setResolver",
-    "QUnit"
+    "QUnit",
+    "App"
   ],
   "node" : false,
   "browser" : false,
