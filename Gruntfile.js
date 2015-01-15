@@ -2,6 +2,13 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      css: {
+        files: [
+          {src: ['src/stylesheets/*.css'], dest: 'dist/<%= pkg.name.replace(".css", "") %>.css'}
+        ]
+      }
+    },
     concat: {
       options: {
         separator: "\n\n"
@@ -40,7 +47,8 @@ module.exports = function(grunt) {
     emberTemplates: {
       options: {
         templateName: function(sourceFile) {
-          return 'component-template-'+sourceFile.replace(/\//, '-');
+          var template = sourceFile.replace('src/templates/', '').replace('/', '-');
+          return 'ember-component-starter-template-' + template;
         }
       },
       'build/templates.js': ["src/**/*.hbs"]
@@ -59,7 +67,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
 
   // default task just builds & dists the package.
-  grunt.registerTask('default', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'uglify', 'concat:dist']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'uglify', 'concat:dist', 'copy:css']);
   // test task builds, tests, and then dists the package.
-  grunt.registerTask('test', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'karma', 'uglify', 'concat:dist']);
+  grunt.registerTask('test', ['jshint', 'clean', 'concat:build', 'emberTemplates', 'karma', 'uglify', 'concat:dist', 'copy:css']);
 };
