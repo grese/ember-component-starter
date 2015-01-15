@@ -20,7 +20,8 @@
     "emq",
     "setResolver",
     "QUnit",
-    "App"
+    "App",
+    "console"
   ],
   "node" : false,
   "browser" : false,
