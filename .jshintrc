@@ -21,7 +21,9 @@
     "setResolver",
     "QUnit",
     "App",
-    "console"
+    "console",
+    "click",
+    "andThen"
   ],
   "node" : false,
   "browser" : false,
