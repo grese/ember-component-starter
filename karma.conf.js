@@ -16,9 +16,10 @@ module.exports = function(config) {
       'build/**/*.js',
       'tests/spec/**/*.spec.js',
     ],
-    frameworks: ['qunit'],
+    frameworks: ['qunit', 'sinon'],
     plugins: [
       'karma-qunit',
+      'karma-sinon',
       'karma-phantomjs-launcher',
       'karma-junit-reporter',
       'karma-coverage'

@@ -23,7 +23,8 @@
     "App",
     "console",
     "click",
-    "andThen"
+    "andThen",
+    "sinon"
   ],
   "node" : false,
   "browser" : false,
