@@ -1,1 +1,4 @@
-// Main.js
+(function(){
+	'use strict';
+	
+}(this));
